@@ -28,11 +28,15 @@ const Sidebar = ({ containerRef }: Props) => {
   const scrollIntoView = (selector: string) => {
     const section = containerRef?.current?.querySelector(selector);
 
-    section?.scrollIntoView({ behavior: "smooth" });
+    section?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "nearest",
+    });
   };
   return (
     <div className="overflow-y-hidden w-12 pr-2">
-      <div className="flex justify-center items-center  px-3 md:p-0">
+      <div className="flex justify-center items-center  px-3 md:px-0.5">
         <Image src="/logo.svg" alt="" className="pt-4" width={60} height={60} />
       </div>
 
@@ -48,8 +52,11 @@ const Sidebar = ({ containerRef }: Props) => {
             <LuUser2 />
           </div>
         </div>
-        <div className="flex items-center justify-center  my-5">
-          <div className="tooltip tooltip-right absolute" data-tip="Basics">
+        <div
+          className="flex items-center justify-center  my-5"
+          onClick={() => scrollIntoView("#summary")}
+        >
+          <div className="tooltip tooltip-right absolute" data-tip="Summary">
             <PiArticle />
           </div>
         </div>

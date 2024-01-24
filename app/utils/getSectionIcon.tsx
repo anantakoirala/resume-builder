@@ -14,10 +14,11 @@ import {
   PiGameController,
   PiPuzzlePiece,
   PiBooks,
+  PiArticle,
 } from "react-icons/pi";
 
 type Props = {
-  id: keyof Sections;
+  id: keyof Sections | "summary";
 };
 
 const sectionIcons = (id: string) => {
@@ -48,6 +49,8 @@ const sectionIcons = (id: string) => {
       return <PiPuzzlePiece size={18} />;
     case "publications":
       return <PiBooks size={18} />;
+    case "summary":
+      return <PiArticle size={18} />;
     default:
       return null;
   }

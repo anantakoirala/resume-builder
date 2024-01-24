@@ -1,4 +1,5 @@
 "use client";
+import Input from "@/app/components/Input";
 import Modal from "@/app/components/Modal";
 import { closeModal } from "@/redux/modal/modalSlice";
 import { setBasicSection } from "@/redux/resume/resumeSlice";
@@ -12,12 +13,12 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createId } from "@paralleldrive/cuid2";
 import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { PiPlus } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 
 type Props = {
-  id: keyof Sections;
+  id: "educations";
 };
 
 const EducationModal = ({ id }: Props) => {
@@ -33,6 +34,9 @@ const EducationModal = ({ id }: Props) => {
     handleSubmit,
     formState: { errors },
     reset,
+    control,
+    setValue,
+    getValues,
   } = useForm<Education>({
     resolver: zodResolver(educationSchema),
     defaultValues: defaultEducation,
@@ -42,6 +46,7 @@ const EducationModal = ({ id }: Props) => {
 
   const submitForm = async (data: Education) => {
     const path = `sections.${id}.items`;
+    console.log("data", data);
     let modifiedItems = [
       ...resume.data.sections[`${id}`].items,
       { ...data, id: createId() },
@@ -72,16 +77,17 @@ const EducationModal = ({ id }: Props) => {
 
   useEffect(() => {
     if (mode === "update") {
-      console.log("itemId", itemId);
-      const previousData = resume.data.sections[`${id}`].items.find(
-        (item) => item.id === itemId
-      );
+      const previousData = resume.data.sections[`${id}`].items.find((item) => {
+        item.id === itemId;
+        return item as Education;
+      });
       console.log("previousdata", previousData);
       reset({ ...defaultEducation, ...previousData });
+      console.log("default education", defaultEducation);
     } else {
       reset(defaultEducation);
     }
-  }, [mode, reset, id, itemId, resume]);
+  }, [mode, reset, id, itemId, resume, getValues]);
   if (name != id) return null;
   return (
     <Modal>
@@ -176,6 +182,29 @@ const EducationModal = ({ id }: Props) => {
               placeholder=""
               {...register("url.href")}
             />
+            <div className="text-xs text-gray-500 mb-1">
+              {errors?.url?.href?.message && <p>{errors?.url?.href.message}</p>}
+            </div>
+          </div>
+          <div className="mt-2">
+            <label htmlFor="" className="font-medium">
+              Website
+            </label>
+            <Input
+              onChange={(value) => setValue("summary", value)}
+              contentValue={getValues("summary")}
+            />
+            {/* <Controller
+              control={control}
+              name="summary"
+              render={({ field: { onChange, onBlur, value, ref } }) => (
+                <Input
+                  onChange={(value: string) => onChange(value)}
+                  contentValue={value}
+                />
+              )}
+            /> */}
+
             <div className="text-xs text-gray-500 mb-1">
               {errors?.url?.href?.message && <p>{errors?.url?.href.message}</p>}
             </div>

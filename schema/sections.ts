@@ -12,6 +12,7 @@ import { refrenceSchema } from "./sections/refrence";
 import { volunteerSchema } from "./sections/volunteer";
 import { publicationSchema } from "./sections/publication";
 import { ProfileSchema } from "./profile";
+import { FilterKeys } from "@/app/utils/type";
 
 export const sectionsSchema = z.object({
   awards: z.object({
@@ -77,6 +78,10 @@ export const sectionsSchema = z.object({
 });
 
 export type Sections = z.infer<typeof sectionsSchema>;
+export type SectionWithItem<T = unknown> = Sections[FilterKeys<
+  Sections,
+  { items: T[] }
+>];
 
 export const sectionDefault: Sections = {
   awards: { id: "awards", name: "Awards", items: [] },

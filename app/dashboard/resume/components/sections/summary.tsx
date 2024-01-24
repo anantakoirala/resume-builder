@@ -9,8 +9,28 @@ import {
 import ListItem from "@tiptap/extension-list-item";
 import StarterKit from "@tiptap/starter-kit";
 import BulletList from "@tiptap/extension-bullet-list";
+import {
+  PiArticle,
+  PiListBullets,
+  PiListBulletsThin,
+  PiListNumbers,
+  PiTextB,
+  PiTextHOne,
+  PiTextHThree,
+  PiTextHTwo,
+  PiTextItalic,
+} from "react-icons/pi";
+import GetSectionIcon from "@/app/utils/getSectionIcon";
+import Input from "@/app/components/Input";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 const Summary = () => {
+  const { resume } = useSelector((state: RootState) => state.resume);
+  console.log("resume", resume.data.summary);
+  const getSummaryValue = (value: string) => {
+    console.log("summart", value);
+  };
   const editor = useEditor({
     extensions: [StarterKit],
     editorProps: {
@@ -28,14 +48,17 @@ const Summary = () => {
 
   return (
     <>
-      <button
-        onClick={() => editor?.chain().focus().toggleBulletList().run()}
-        className={editor?.isActive("bulletList") ? "" : ""}
-      >
-        <p className="border">bullet list</p>
-      </button>
-
-      <EditorContent editor={editor} className="bg-green-800 w-full " />
+      <div className="flex flex-col " id="summary">
+        <div className="w-full  flex flex-col justify-between gap-y-5">
+          <div className="flex flex-row items-center gap-x-4 ">
+            <GetSectionIcon id={"summary"} />
+            <h2 className="line-clamp-1 text-3xl font-bold">Summary</h2>
+          </div>
+          <div className="mb-4">
+            <Input onChange={(value) => getSummaryValue(value)} />
+          </div>
+        </div>
+      </div>
     </>
   );
 };

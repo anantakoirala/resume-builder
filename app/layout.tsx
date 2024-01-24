@@ -20,7 +20,6 @@ export default function RootLayout({
       </head>
       <body>
         <Provider store={store}>
-          ananta
           <ModalProvider>{children}</ModalProvider>
         </Provider>
       </body>

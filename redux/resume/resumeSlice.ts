@@ -49,6 +49,7 @@ const resumiSlice = createSlice({
       // const datata = getNestedKeys(state.resume);
       // console.log(datata);
     },
+    setSummarySection: (state, payload) => {},
   },
 });
 

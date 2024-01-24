@@ -37,7 +37,7 @@ const Page = (props: Props) => {
       </Drawer>
       {/* left sidebar desktop */}
       <div className="hidden lg:block w-96 h-screen">
-        <div className="-z-10 menu w-full min-h-screen h-screen  bg-slate-50 text-base-content flex flex-row overflow-y-hidden">
+        <div className="-z-10 w-full min-h-screen h-screen  bg-slate-50 text-base-content flex flex-row overflow-y-hidden">
           <Sidebar containerRef={containterRef} />
           <ContentFields containerRef={containterRef} />
         </div>
@@ -48,7 +48,7 @@ const Page = (props: Props) => {
         className={`w-full lg:flex-1
           duration-200  h-screen `}
       >
-        <div className="flex flex-col mx-3 h-screen">
+        <div className="flex flex-col mx-3 min-h-screen h-screen">
           <div className="flex flex-row justify-center">
             <button
               className="h-6 border  bg-black text-white "

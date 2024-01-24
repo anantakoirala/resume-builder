@@ -32,23 +32,25 @@ const ContentFields = React.forwardRef(({ containerRef }: Props, ref) => {
       <Basic />
       <Seperator />
       <Summary />
-
+      <Seperator />
       <SectionBase<Certification>
         id="certifications"
         title={(item) => item.summary}
         description={(item) => item.name}
       />
+      <Seperator />
       <SectionBase<Profile>
         id="profiles"
         title={(item) => item.network}
         description={(item) => item.username}
       />
-
+      <Seperator />
       <SectionBase<Experience>
         id="experiences"
         title={(item) => item.company}
         description={(item) => item.position}
       />
+      <Seperator />
       <SectionBase<Skill>
         id="skills"
         title={(item) => item.name}
@@ -58,16 +60,19 @@ const ContentFields = React.forwardRef(({ containerRef }: Props, ref) => {
             return `${item.keywords.length} keywords`;
         }}
       />
+      <Seperator />
       <SectionBase<Education>
         id="educations"
         title={(item) => item.institution}
         description={(item) => item.area}
       />
+      <Seperator />
       <SectionBase<Language>
         id="languages"
         title={(item) => item.name}
         description={(item) => item.description}
       />
+      <Seperator />
       <SectionBase<Interest>
         id="interests"
         title={(item) => item.name}
@@ -76,30 +81,36 @@ const ContentFields = React.forwardRef(({ containerRef }: Props, ref) => {
             return `${item.keywords.length} keywords`;
         }}
       />
+      <Seperator />
       <SectionBase<Project>
         id="projects"
         title={(item) => item.name}
         description={(item) => item.description}
       />
+      <Seperator />
       <SectionBase<Publication>
         id="publications"
         title={(item) => item.name}
         description={(item) => item.publisher}
       />
+      <Seperator />
       <SectionBase<Award>
         id="awards"
         title={(item) => item.title}
         description={(item) => item.awarder}
       />
-      <SectionBase<Refrence>
-        id="references"
-        title={(item) => item.name}
-        description={(item) => item.description}
-      />
+      <Seperator />
+
       <SectionBase<Volunteer>
         id="volunteers"
         title={(item) => item.organization}
         description={(item) => item.position}
+      />
+      <Seperator />
+      <SectionBase<Refrence>
+        id="references"
+        title={(item) => item.name}
+        description={(item) => item.description}
       />
     </div>
     // <div className="min-h-screen h-screen overflow-y-hidden">
