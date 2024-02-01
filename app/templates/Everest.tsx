@@ -7,12 +7,12 @@ type Props = {};
 
 const Everest = (props: Props) => {
   const { resume } = useSelector((state: RootState) => state.resume);
+  const summary = resume.data.summary.content;
   const profiles = resume.data.sections.profiles;
   const skills = resume.data.sections.skills;
   const cerfifications = resume.data.sections.certifications;
   const languages = resume.data.sections.languages;
   const publications = resume.data.sections.publications;
-  console.log("profiles", profiles.items.length);
   const { basics } = resume.data;
   return (
     <>
@@ -207,10 +207,11 @@ const Everest = (props: Props) => {
           <div className="bg-yellow-100 col-span-2">
             <div className="flex flex-col justify-center items-center px-7 py-8">
               {/* summary */}
-              <div className="w-full  mb-10">
-                laskdfjlasdkfj aldsfj asdlfkj asdlfj adslfj asdlfkja sdflakjsdf
-                lasdkfj lasdfkj alsdfkj alsdkfj
-              </div>
+
+              <div
+                className="w-full  mb-10 wysiwyg"
+                dangerouslySetInnerHTML={{ __html: summary }}
+              ></div>
               {/* experience */}
               <div className="w-full mb-5">
                 <p className="text-black font-bold mb-2 border-b border-blue-900">

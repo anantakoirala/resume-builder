@@ -1,5 +1,6 @@
 "use client";
 import Modal from "@/app/components/Modal";
+import TextInput from "@/app/components/TextInput";
 import { closeModal } from "@/redux/modal/modalSlice";
 import { setBasicSection } from "@/redux/resume/resumeSlice";
 import { RootState } from "@/redux/store";
@@ -12,6 +13,7 @@ import {
 } from "@/schema/sections/experience";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createId } from "@paralleldrive/cuid2";
+import { Input } from "postcss";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { PiPlus } from "react-icons/pi";
@@ -35,6 +37,7 @@ const ExperienceModal = ({ id }: Props) => {
     formState: { errors },
     watch,
     setValue,
+    getValues,
     reset,
   } = useForm<Experience>({
     resolver: zodResolver(experienceSchema),
@@ -57,7 +60,6 @@ const ExperienceModal = ({ id }: Props) => {
         return item; // Return the unchanged item for items that don't match the condition
       });
 
-      console.log("updatedItems", updatedItems);
       modifiedItems = updatedItems;
     }
 
@@ -163,6 +165,19 @@ const ExperienceModal = ({ id }: Props) => {
               placeholder="https://udemy.com"
               {...register("url.href")}
             />
+            <div className="text-xs text-gray-500 mb-1">
+              {errors?.url?.href?.message && <p>{errors?.url?.href.message}</p>}
+            </div>
+          </div>
+          <div className="mt-2">
+            <label htmlFor="" className="font-medium">
+              Summary
+            </label>
+            <TextInput
+              onChange={(value: string) => setValue("summary", value)}
+              contentValue={getValues("summary")}
+            />
+
             <div className="text-xs text-gray-500 mb-1">
               {errors?.url?.href?.message && <p>{errors?.url?.href.message}</p>}
             </div>

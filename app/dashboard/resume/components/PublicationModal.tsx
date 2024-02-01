@@ -16,6 +16,7 @@ import {
   defaultPublication,
   publicationSchema,
 } from "@/schema/sections/publication";
+import TextInput from "@/app/components/TextInput";
 
 type Props = {
   id: keyof Sections;
@@ -34,6 +35,8 @@ const PublicationModal = ({ id }: Props) => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
+    getValues,
   } = useForm<Publication>({
     resolver: zodResolver(publicationSchema),
     defaultValues: defaultPublication,
@@ -152,6 +155,19 @@ const PublicationModal = ({ id }: Props) => {
               {errors?.url?.href?.message && (
                 <p>{errors?.url?.href?.message}</p>
               )}
+            </div>
+          </div>
+          <div className="mt-2">
+            <label htmlFor="" className="font-medium">
+              Summary
+            </label>
+            <TextInput
+              onChange={(value: string) => setValue("summary", value)}
+              contentValue={getValues("summary")}
+            />
+
+            <div className="text-xs text-gray-500 mb-1">
+              {errors?.url?.href?.message && <p>{errors?.url?.href.message}</p>}
             </div>
           </div>
           <div className="flex flex-col md:flex-row  gap-2 mt-4 justify-end ">

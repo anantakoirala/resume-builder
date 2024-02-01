@@ -1,13 +1,17 @@
 import React from "react";
-import First from "../templates/first";
+
+import Everest from "../templates/Everest";
+import Annapurna from "../templates/Annapurna";
 
 type Props = {};
 
 export const getTemplate = (name: string) => {
   switch (name) {
-    case "first":
-      return First;
+    case "everest":
+      return Everest;
+    case "annapurna":
+      return Annapurna;
     default:
-      return First;
+      return Everest;
   }
 };

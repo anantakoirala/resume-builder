@@ -1,12 +1,10 @@
-"use client";
-import React, { useEffect } from "react";
+import React from "react";
 
 type Props = {};
 
-const Page = (props: Props) => {
-  useEffect(() => {});
+const Annapurna = (props: Props) => {
   return (
-    <div className="flex content-center justify-center overflow-hidden p-4">
+    <div className="flex content-center justify-center overflow-hidden ">
       <div
         className="shadow-2xl overflow-hidden max-w-screen-md border"
         style={{ width: "816.48px", minHeight: "1120px" }}
@@ -333,4 +331,4 @@ const Page = (props: Props) => {
   );
 };
 
-export default Page;
+export default Annapurna;

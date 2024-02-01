@@ -1,6 +1,6 @@
 "use client";
 import { RootState } from "@/redux/store";
-import React from "react";
+import React, { useEffect } from "react";
 import { LuUser2 } from "react-icons/lu";
 import { PiAperture } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,9 @@ function Basic({}: Props) {
   const dispatch = useDispatch();
 
   const setBasicSectionData = (path: string, value: string) => {
-    dispatch(setBasicSection({ path, value }));
+    const response = dispatch(setBasicSection({ path, value }));
+
+    console.log(response);
   };
 
   return (
@@ -60,6 +62,7 @@ function Basic({}: Props) {
             onChange={(e) =>
               setBasicSectionData("basics.headline", e.target.value)
             }
+            value={resume?.data.basics.headline}
           />
         </div>
         <div className="flex flex-row gap-2">
@@ -71,6 +74,7 @@ function Basic({}: Props) {
               onChange={(e) =>
                 setBasicSectionData("basics.email", e.target.value)
               }
+              value={resume?.data.basics.email}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -79,8 +83,9 @@ function Basic({}: Props) {
               type="text"
               className="w-full h-7 lg:h-9 rounded  border border-black px-3  focus:border-indigo-600 focus:outline-none"
               onChange={(e) =>
-                setBasicSectionData("basics.url.label", e.target.value)
+                setBasicSectionData("basics.url.href", e.target.value)
               }
+              value={resume?.data.basics.url.href}
             />
           </div>
         </div>
@@ -93,6 +98,7 @@ function Basic({}: Props) {
               onChange={(e) =>
                 setBasicSectionData("basics.phone", e.target.value)
               }
+              value={resume?.data.basics.phone}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -103,6 +109,7 @@ function Basic({}: Props) {
               onChange={(e) =>
                 setBasicSectionData("basics.location", e.target.value)
               }
+              value={resume?.data.basics.location}
             />
           </div>
         </div>

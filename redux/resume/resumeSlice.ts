@@ -1,17 +1,24 @@
 "use client";
-import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+  current,
+  PayloadAction,
+} from "@reduxjs/toolkit";
 import { Resumes } from "@/schema/resumes";
 import { ResumeData } from "@/schema";
 import { DefaultResumeData, Resume } from "@/schema/resume";
 import { Profile } from "@/schema/profile";
 import { Sections } from "@/schema/sections";
 import { basicsSchema, Basics } from "@/schema/basics";
+import axiosClient from "../../app/utils/axios";
 import _set from "lodash.set";
 import {
   getNestedKeys,
   getValueFromPath,
   NestedKeyOf,
 } from "@/utils/NestedKeys";
+import { TestFunction } from "../test";
 
 interface initialStateInterface {
   resumes: Resumes[];
@@ -44,12 +51,16 @@ const resumiSlice = createSlice({
     setBasicSection: (state, action) => {
       const { path, value } = action.payload;
       state.resume.data = _set(state.resume.data, path, value);
-      // console.log(current(state.resume));
+
+      // TestFunction();
       return state;
-      // const datata = getNestedKeys(state.resume);
-      // console.log(datata);
     },
-    setSummarySection: (state, payload) => {},
+    setSummarySection: (state, action) => {
+      const { path, value } = action.payload;
+      state.resume.data = _set(state.resume.data, path, value);
+
+      return state;
+    },
   },
 });
 
@@ -59,5 +70,6 @@ export const {
   getSections,
   setSectionData,
   setBasicSection,
+  setSummarySection,
 } = resumiSlice.actions;
 export const resumeReducer = resumiSlice.reducer;

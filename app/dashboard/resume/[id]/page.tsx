@@ -13,19 +13,44 @@ import First from "@/app/templates/first";
 import Yeti from "@/app/templates/Yeti";
 import Second from "@/app/templates/Second";
 import Everest from "@/app/templates/Everest";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
+import debounce from "lodash.debounce";
+import { TestFunction } from "@/redux/test";
+import RightSidebar from "@/app/components/RightSidebar";
+import Annapurna from "@/app/templates/Annapurna";
+import RightContentField from "../components/RightContentField";
 
 type Props = {};
 
 const Page = (props: Props) => {
+  const { resume } = useSelector((state: RootState) => state.resume);
   const containterRef = useRef<HTMLDivElement | null>(null);
+  const templateRef = useRef<HTMLDivElement | null>(null);
   const searchParams = useParams();
-  const Template = useMemo(() => getTemplate("first"), []);
-
+  const Template = useMemo(
+    () => getTemplate(resume.data.metadata.template),
+    [resume.data.metadata.template]
+  );
   const { id } = useParams();
 
   const { data, isLoading, error } = useGetResumeQuery(id);
   const [isOpenRight, setIsOpenRight] = React.useState(false);
   const [isOpenLeft, setIsOpenLeft] = React.useState(false);
+
+  useEffect(() => {
+    const debouncedFunction = debounce(() => {
+      TestFunction(resume);
+    }, 500);
+
+    // Invoke the debounced function
+    debouncedFunction();
+
+    // Cleanup function to cancel the debounced function if component unmounts
+    return () => {
+      debouncedFunction.cancel();
+    };
+  }, [resume]);
 
   return (
     <div className="flex relative overflow-hidden">
@@ -65,51 +90,59 @@ const Page = (props: Props) => {
               right{" "}
             </button>
           </div>
+
           <div className="flex border shadow-lg   w-full h-full ">
             <div className="flex flex-col items-center w-full ">
-              <TransformWrapper
-                maxScale={1.5}
-                minScale={0.4}
-                initialPositionX={80}
-                initialPositionY={-180}
-                initialScale={0.8}
-                limitToBounds={false}
-              >
-                <TransformComponent
-                  wrapperClass="w-full h-full"
-                  contentClass="relative grid items-start justify-center space-x-12 pointer-events-none scale-75"
-                  contentStyle={{
-                    width: "18cm",
-                    gridTemplateColumns: `repeat(1, 1fr)`,
-                  }}
-                >
-                  <div
-                    className="relative bg-white shadow-2xl scale-75"
-                    style={{ width: "21cm", minHeight: "1120px" }}
+              {isLoading ? (
+                <>Loading</>
+              ) : (
+                <>
+                  <TransformWrapper
+                    centerOnInit
+                    maxScale={1.5}
+                    minScale={0.4}
+                    // initialPositionX={80}
+                    // initialPositionY={-180}
+                    initialScale={0.8}
+                    limitToBounds={false}
                   >
-                    <Everest />
-                    {/* <div
-                      className=" p-8 bg-orange-300 shadow-md "
-                      style={{ width: "21cm", minHeight: "1120px" }}
+                    <TransformComponent
+                      wrapperClass="w-full h-full"
+                      contentClass="relative grid items-start justify-center space-x-12 pointer-events-none scale-75"
+                      contentStyle={{
+                        width: "18cm",
+                        gridTemplateColumns: `repeat(1, 1fr)`,
+                      }}
                     >
-                      <h1 className="text-4xl font-bold mb-4">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Maiores, adipisci facere nemo maxime sunt tempora totam
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Maiores, adipisci facere nemo maxime sunt tempora totam
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      </h1>
-                    </div> */}
-                  </div>
-                </TransformComponent>
-              </TransformWrapper>
+                      <div
+                        className="relative bg-white shadow-2xl scale-75"
+                        style={{ width: "21cm", minHeight: "1120px" }}
+                      >
+                        {/* <Annapurna /> */}
+                        {/* <Everest /> */}
+                        <Template />
+                      </div>
+                    </TransformComponent>
+                  </TransformWrapper>
+                </>
+              )}
             </div>
           </div>
         </div>
       </div>
       {/* righ sidebar desktop ends */}
       <div className="hidden lg:block w-96 h-screen bg-slate-600">
-        right sidebat
+        <div className="-z-10 w-full min-h-screen h-screen  bg-slate-50 text-base-content flex flex-row overflow-y-hidden">
+          {/* <ContentFields containerRef={containterRef} /> */}
+          {isLoading ? (
+            <>Loading</>
+          ) : (
+            <>
+              <RightContentField />
+            </>
+          )}
+        </div>
+        {/* <RightSidebar templateRef={templateRef} id={id} /> */}
       </div>
       {/* <div
         className={

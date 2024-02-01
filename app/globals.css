@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary: #ff6f3c;
+  --secondary: #fdffcd;
+  --tertiary: #ffebbb;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -21,3 +31,38 @@
 .hide-scrollbar::-webkit-scrollbar {
   width: 0 !important;
 }
+.wysiwyg {
+  @apply prose max-w-none text-current prose-headings:mt-0 prose-headings:mb-2 prose-p:mt-0 prose-p:mb-2 prose-ul:mt-0 prose-ul:mb-2 prose-li:mt-0 prose-li:mb-2 prose-ol:mt-0 prose-ol:mb-2 prose-img:mt-0 prose-img:mb-2 prose-hr:mt-0 prose-hr:mb-2 prose-p:leading-normal prose-li:leading-normal;
+}
+
+.ck-editor__main {
+  background-color: "red";
+}
+
+.ck-editor__editable_inline {
+  height: 200px !important;
+  padding: 100px;
+  margin-top: 0px;
+  overflow-x: hidden;
+  overflow-y: auto !important;
+}
+.ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
+  padding: 20px;
+}
+.ck-content {
+  padding-left: 20px !important;
+  padding-right: 10px !important;
+}
+.ck-blurred {
+  padding: 20px !important;
+}
+.ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
+  padding-top: 0px !important;
+}
+/* .ck-content ul {
+  padding-left: 20px !important;
+  padding-right: 10px !important;
+}
+.ck-content p {
+  padding-left: -5px !important;
+} */

@@ -1,50 +1,29 @@
 "use client";
 
-import {
-  Editor,
-  EditorContent,
-  EditorContentProps,
-  useEditor,
-} from "@tiptap/react";
-import ListItem from "@tiptap/extension-list-item";
-import StarterKit from "@tiptap/starter-kit";
-import BulletList from "@tiptap/extension-bullet-list";
-import {
-  PiArticle,
-  PiListBullets,
-  PiListBulletsThin,
-  PiListNumbers,
-  PiTextB,
-  PiTextHOne,
-  PiTextHThree,
-  PiTextHTwo,
-  PiTextItalic,
-} from "react-icons/pi";
 import GetSectionIcon from "@/app/utils/getSectionIcon";
-import Input from "@/app/components/Input";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import TextInput from "@/app/components/TextInput";
+import { setSummarySection } from "@/redux/resume/resumeSlice";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+const CKEditor = dynamic(() => import("../../../../components/CKEditor"), {
+  ssr: false,
+  loading: () => <p>Loading</p>,
+});
 
 const Summary = () => {
+  const [isClient, setIsClient] = useState(false);
+  const dispatch = useDispatch();
   const { resume } = useSelector((state: RootState) => state.resume);
-  console.log("resume", resume.data.summary);
-  const getSummaryValue = (value: string) => {
-    console.log("summart", value);
-  };
-  const editor = useEditor({
-    extensions: [StarterKit],
-    editorProps: {
-      attributes: {
-        class:
-          "prose prose-sm prose-zinc max-h-[200px] max-w-none list-disc overflow-y-scroll dark:prose-invert focus:outline-none [&_*]:my-2",
-      },
-    },
-    content: "",
-  });
 
-  if (!editor) {
-    return null;
-  }
+  const getSummaryValue = (value: string) => {
+    dispatch(setSummarySection({ path: "summary.content", value: value }));
+  };
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <>
@@ -55,7 +34,21 @@ const Summary = () => {
             <h2 className="line-clamp-1 text-3xl font-bold">Summary</h2>
           </div>
           <div className="mb-4">
-            <Input onChange={(value) => getSummaryValue(value)} />
+            {/* <TextInput
+              onChange={(value) => getSummaryValue(value)}
+              contentValue={resume.data.summary.content}
+            /> */}
+
+            {isClient && (
+              <CKEditor
+                name="description"
+                value={resume.data.summary.content}
+                onChange={(data) => {
+                  getSummaryValue(data);
+                }}
+                editorLoaded={true}
+              />
+            )}
           </div>
         </div>
       </div>

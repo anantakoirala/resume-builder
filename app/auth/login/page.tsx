@@ -26,7 +26,7 @@ const Page = (props: Props) => {
           Sign in to your account
         </h2>
         <h6>
-          <span className="opacity-75">Don't have an account?</span>
+          <span className="opacity-75">Don t have an account?</span>
           <Link href={"/auth/sign-up"} className="text-black ml-1">
             Create one now
           </Link>

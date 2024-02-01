@@ -6,17 +6,20 @@ import { useSelector } from "react-redux";
 import Picture from "../components/template/components/Picture";
 import { cn } from "@/utils/style";
 
-type Props = {};
+type Props = {
+  templateRef: React.RefObject<HTMLDivElement> | null;
+};
 
-const First = (props: Props) => {
+const ContentFields = React.forwardRef(({ templateRef }: Props, ref) => {
   const { resume } = useSelector((state: RootState) => state.resume);
   const { basics } = resume.data;
   return (
     <div
+      ref={templateRef}
       className="grid h-full grid-cols-3"
       style={{ lineHeight: `2.5`, fontSize: `48px` }}
     >
-      <div className="main p-custom group col-span-2 space-y-4">
+      <div className="main p-custom group col-span-2 space-y-4" id="ananta1">
         <div className="flex items-center space-x-4">
           <Picture />
 
@@ -79,6 +82,8 @@ const First = (props: Props) => {
       </div>
     </div>
   );
-};
+});
 
-export default First;
+ContentFields.displayName = "First";
+
+export default ContentFields;

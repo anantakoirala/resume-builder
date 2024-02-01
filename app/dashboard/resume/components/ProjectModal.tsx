@@ -3,6 +3,7 @@ import ReusableInput from "@/app/components/KeyWordInput";
 import KeyWordInput from "@/app/components/KeyWordInput";
 import Modal from "@/app/components/Modal";
 import Slider from "@/app/components/Slider";
+import TextInput from "@/app/components/TextInput";
 import { closeModal } from "@/redux/modal/modalSlice";
 import { setBasicSection } from "@/redux/resume/resumeSlice";
 import { RootState } from "@/redux/store";
@@ -39,6 +40,8 @@ const ProjectModal = ({ id }: Props) => {
     control,
     formState: { errors },
     reset,
+    setValue,
+    getValues,
   } = useForm<Project>({
     resolver: zodResolver(projectSchema),
     defaultValues: defaultProject,
@@ -157,6 +160,21 @@ const ProjectModal = ({ id }: Props) => {
               <div className="text-xs text-gray-500 mb-1">
                 {errors.url?.href?.message && (
                   <p>{errors.url?.href?.message}</p>
+                )}
+              </div>
+            </div>
+            <div className="mt-2">
+              <label htmlFor="" className="font-medium">
+                Summary
+              </label>
+              <TextInput
+                onChange={(value: string) => setValue("summary", value)}
+                contentValue={getValues("summary")}
+              />
+
+              <div className="text-xs text-gray-500 mb-1">
+                {errors?.url?.href?.message && (
+                  <p>{errors?.url?.href.message}</p>
                 )}
               </div>
             </div>

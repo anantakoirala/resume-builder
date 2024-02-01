@@ -27,7 +27,7 @@ type Props = {
   register?: any;
 };
 
-const Input = ({ onChange, contentValue }: Props) => {
+const TextInput = ({ onChange, contentValue }: Props) => {
   const editor = useEditor({
     extensions: [StarterKit],
     editorProps: {
@@ -138,4 +138,4 @@ const Input = ({ onChange, contentValue }: Props) => {
   );
 };
 
-export default Input;
+export default TextInput;

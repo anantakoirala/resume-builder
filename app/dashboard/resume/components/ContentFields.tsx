@@ -26,7 +26,7 @@ type Props = {
 const ContentFields = React.forwardRef(({ containerRef }: Props, ref) => {
   return (
     <div
-      className="flex flex-col flex-1 py-6 px-2 h-screen  overflow-y-auto"
+      className="flex flex-col flex-1 py-6 px-2 h-screen  no-scrollbar overflow-y-auto"
       ref={containerRef}
     >
       <Basic />
@@ -35,8 +35,8 @@ const ContentFields = React.forwardRef(({ containerRef }: Props, ref) => {
       <Seperator />
       <SectionBase<Certification>
         id="certifications"
-        title={(item) => item.summary}
-        description={(item) => item.name}
+        title={(item) => item.name}
+        description={(item) => item.issuer}
       />
       <Seperator />
       <SectionBase<Profile>

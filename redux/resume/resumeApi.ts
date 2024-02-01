@@ -21,11 +21,27 @@ export const resumeApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    updateResume: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/${id}`,
+        method: "PATCH",
+        body: data,
+        credentials: "include" as const,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          console.log("updated", result);
+        } catch (error: any) {
+          console.log("updated errir");
+          console.log(error);
+        }
+      },
+    }),
     getResumes: builder.query({
       query: () => "/resume",
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         const result = await queryFulfilled;
-        console.log("bhayo");
         dispatch(setResumes(result.data));
       },
     }),
@@ -46,6 +62,7 @@ export const resumeApi = apiSlice.injectEndpoints({
 
 export const {
   useCreateResumeMutation,
+  useUpdateResumeMutation,
   useGetResumesQuery,
   useGetResumeQuery,
 } = resumeApi;

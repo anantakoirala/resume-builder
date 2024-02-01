@@ -1,5 +1,6 @@
 "use client";
 import Modal from "@/app/components/Modal";
+import TextInput from "@/app/components/TextInput";
 import { closeModal } from "@/redux/modal/modalSlice";
 import { setBasicSection } from "@/redux/resume/resumeSlice";
 import { RootState } from "@/redux/store";
@@ -29,6 +30,8 @@ const AwardModal = ({ id }: Props) => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
+    getValues,
   } = useForm<Award>({
     resolver: zodResolver(awardSchema),
     defaultValues: defaultAward,
@@ -143,6 +146,19 @@ const AwardModal = ({ id }: Props) => {
               placeholder=""
               {...register("url.href")}
             />
+            <div className="text-xs text-gray-500 mb-1">
+              {errors?.url?.href?.message && <p>{errors?.url?.href.message}</p>}
+            </div>
+          </div>
+          <div className="mt-2">
+            <label htmlFor="" className="font-medium">
+              Summary
+            </label>
+            <TextInput
+              onChange={(value: string) => setValue("summary", value)}
+              contentValue={getValues("summary")}
+            />
+
             <div className="text-xs text-gray-500 mb-1">
               {errors?.url?.href?.message && <p>{errors?.url?.href.message}</p>}
             </div>

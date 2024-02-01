@@ -1,5 +1,5 @@
 "use client";
-import Input from "@/app/components/Input";
+import TextInput from "@/app/components/TextInput";
 import Modal from "@/app/components/Modal";
 import { closeModal } from "@/redux/modal/modalSlice";
 import { setBasicSection } from "@/redux/resume/resumeSlice";
@@ -188,22 +188,12 @@ const EducationModal = ({ id }: Props) => {
           </div>
           <div className="mt-2">
             <label htmlFor="" className="font-medium">
-              Website
+              Summary
             </label>
-            <Input
-              onChange={(value) => setValue("summary", value)}
+            <TextInput
+              onChange={(value: string) => setValue("summary", value)}
               contentValue={getValues("summary")}
             />
-            {/* <Controller
-              control={control}
-              name="summary"
-              render={({ field: { onChange, onBlur, value, ref } }) => (
-                <Input
-                  onChange={(value: string) => onChange(value)}
-                  contentValue={value}
-                />
-              )}
-            /> */}
 
             <div className="text-xs text-gray-500 mb-1">
               {errors?.url?.href?.message && <p>{errors?.url?.href.message}</p>}
