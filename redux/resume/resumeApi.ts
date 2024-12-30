@@ -57,6 +57,27 @@ export const resumeApi = apiSlice.injectEndpoints({
         dispatch(setResume(result.data));
       },
     }),
+    printResume: builder.query({
+      query: (id) => ({
+        url: `/resume/print/${id}`,
+        method: "GET",
+        credentials: "include" as const,
+        responseHandler: (response: any) => response.blob(),
+
+        // transformResponse: (response: Blob) => {
+        //   // Convert the Blob object to a base64-encoded string
+        //   return new Promise((resolve, reject) => {
+        //     const reader = new FileReader();
+        //     reader.onload = () => {
+        //       const base64String = reader.result;
+        //       resolve(base64String);
+        //     };
+        //     reader.onerror = reject;
+        //     reader.readAsDataURL(response);
+        //   });
+        // },
+      }),
+    }),
   }),
 });
 
@@ -65,4 +86,5 @@ export const {
   useUpdateResumeMutation,
   useGetResumesQuery,
   useGetResumeQuery,
+  useLazyPrintResumeQuery,
 } = resumeApi;

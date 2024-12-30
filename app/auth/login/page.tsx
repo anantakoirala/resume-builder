@@ -1,14 +1,16 @@
 "use client";
 import { useLoginMutation } from "@/redux/auth/authApi";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 type Props = {};
 
 const Page = (props: Props) => {
+  const router = useRouter();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
-  const [login, { isLoading, isError, isSuccess }] = useLoginMutation();
+  const [login, { isLoading, isError, isSuccess, error }] = useLoginMutation();
 
   const submitLogin = async (e: any) => {
     console.log("data");
@@ -17,8 +19,21 @@ const Page = (props: Props) => {
       password,
     };
     const response = await login(data);
+
+    if ("error" in response) {
+      if ("status" in response?.error) {
+        console.log("responseerrorstatus", response?.error?.status);
+      }
+      console.log("responseerror", response?.error);
+    }
     console.log("response", response);
   };
+  useEffect(() => {
+    if (isSuccess) {
+      router.push("/dashboard/resumes");
+    }
+  }, [isSuccess, router]);
+
   return (
     <div className="">
       <div className="">

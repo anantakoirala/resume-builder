@@ -7,6 +7,7 @@ type Props = {};
 
 const Everest = (props: Props) => {
   const { resume } = useSelector((state: RootState) => state.resume);
+
   const summary = resume.data.summary.content;
   const profiles = resume.data.sections.profiles;
   const skills = resume.data.sections.skills;
@@ -16,10 +17,17 @@ const Everest = (props: Props) => {
   const { basics } = resume.data;
   return (
     <>
-      <div className="flex content-center justify-center overflow-hidden">
+      <div
+        className="flex content-center justify-center overflow-hidden "
+        style={{ fontFamily: resume.data.metadata.font }}
+      >
         <div
-          className="grid grid-cols-3 shadow-2xl overflow-hidden max-w-screen-md"
-          style={{ width: "816.48px", minHeight: "1120px" }}
+          className={`grid grid-cols-3 shadow-2xl overflow-hidden max-w-screen-md `}
+          style={{
+            width: "816.48px",
+            minHeight: "1120px",
+          }}
+          id="template"
         >
           <div className="bg-blue-900 ">
             <div className="flex flex-col justify-center items-center px-2 py-8">
@@ -30,8 +38,8 @@ const Everest = (props: Props) => {
                     alt=""
                     className="w-32 h-32 object-cover border-2 rounded-full"
                   />
-                  <p className="w-full text-center text-white font-bold  m-1">
-                    {basics.name}
+                  <p className="w-full text-center text-white m-1">
+                    {basics.name} aaa
                   </p>
                   <p className="w-full text-center text-white font-medium  m-1">
                     {basics.headline}
@@ -40,7 +48,7 @@ const Everest = (props: Props) => {
               </div>
               <div className="mb-5 w-full"></div>
               <div className="text-white pl-5 w-full mb-4">
-                <p className="text-white font-bold mb-2 border-b">Contacts</p>
+                <p className="text-white font-bold mb-2 border-b ">Contacts</p>
 
                 <div className="mb-2 ">
                   <div className="flex items-start gap-x-2 ">
@@ -214,7 +222,7 @@ const Everest = (props: Props) => {
               ></div>
               {/* experience */}
               <div className="w-full mb-5">
-                <p className="text-black font-bold mb-2 border-b border-blue-900">
+                <p className="text-black font-bold mb-2 border-b border-blue-900 ">
                   Experience
                 </p>
                 {/* experience list */}

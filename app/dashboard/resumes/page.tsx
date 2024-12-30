@@ -20,7 +20,6 @@ import Link from "next/link";
 type Props = {};
 
 const Page = (props: Props) => {
-  console.log("hello");
   const dispatch = useDispatch();
   const router = useRouter();
 

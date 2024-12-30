@@ -124,7 +124,7 @@ const ProjectModal = ({ id }: Props) => {
               <input
                 type="text"
                 className="rounded w-full p-2 border border-gray-400 placeholder-slate-600 text-sm"
-                placeholder=""
+                placeholder="Project lead"
                 {...register("description")}
               />
               <div className="text-xs text-gray-500 mb-1">

@@ -54,7 +54,7 @@ function SectionBase<T>({ id, title, description }: SectionProps<T>) {
       <div className="w-full  flex flex-col justify-between gap-y-5">
         <div className="flex flex-row items-center gap-x-4 ">
           <GetSectionIcon id={id} />
-          <h2 className="line-clamp-1 text-3xl font-bold">{section.name}</h2>
+          <h2 className="line-clamp-1 text-3xl font-bold ">{section.name}</h2>
         </div>
         {/* <div>menu</div> */}
         {/* <MenuContext /> */}
@@ -62,7 +62,7 @@ function SectionBase<T>({ id, title, description }: SectionProps<T>) {
           {section.items.map((item, index) => (
             <React.Fragment key={item.id}>
               <div
-                className="flex flex-col w-full h-16  border justify-center pl-4 mb-3 cursor-pointer"
+                className="flex flex-col w-full h-auto  border justify-center p-4 mb-3 cursor-pointer"
                 key={index}
                 onContextMenu={(e) => {
                   e.preventDefault();
@@ -74,7 +74,9 @@ function SectionBase<T>({ id, title, description }: SectionProps<T>) {
                 }}
               >
                 <p className="font-medium cursor-pointer">{title(item as T)}</p>
-                <p className="cursor-pointer">{description?.(item as T)}</p>
+                <p className="cursor-pointer text-sm font-light ">
+                  {description?.(item as T)}
+                </p>
               </div>
               {contextMenuState.clicked && (
                 <ContextMenu

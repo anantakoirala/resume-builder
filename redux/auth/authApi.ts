@@ -37,7 +37,25 @@ export const authApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    logOut: builder.mutation({
+      query: (data) => ({
+        url: "/auth/logout",
+        method: "POST",
+        body: data,
+        credentials: "include" as const,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          console.log("logout", result);
+          //   dispatch(userRegistration({ token: result.data.activationToken }));
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
+    }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation } = authApi;
+export const { useRegisterMutation, useLoginMutation, useLogOutMutation } =
+  authApi;

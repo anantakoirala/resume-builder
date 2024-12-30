@@ -18,11 +18,7 @@ export default function RootLayout({
       <head>
         <Script src="https://unpkg.com/@phosphor-icons/web"></Script>
       </head>
-      <body>
-        <Provider store={store}>
-          <ModalProvider>{children}</ModalProvider>
-        </Provider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

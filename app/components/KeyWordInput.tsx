@@ -84,7 +84,7 @@ const ReusableInput: React.FC<ReusableInputProps> = ({
         placeholder={placeholder}
       />
 
-      <div className="flex flex-row gap-2 w-full mt-2">
+      <div className="flex flex-row flex-wrap gap-2 w-full mt-2">
         {value &&
           value.map((v: string, index: number) => (
             <div
